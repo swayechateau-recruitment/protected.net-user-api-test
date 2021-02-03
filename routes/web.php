@@ -12,10 +12,9 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-// remove route later
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+
+// app docs
+$router->get('/', 'AppController@index');
 // app install
 $router->get('/install', 'AppController@install');
 // app search queries - only users return for now

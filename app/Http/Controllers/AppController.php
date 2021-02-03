@@ -16,6 +16,10 @@ class AppController extends Controller
     {
         $this->middleware('auth',['except'=> 'index']);
     }
+    public function index()
+    {
+        return app()->version();
+    }
 
     public function install(Request $request)
     {
