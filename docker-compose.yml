@@ -1,0 +1,49 @@
+
+version: '3.5'
+
+services:
+  lumen-app:
+    build:
+      context: '.'
+      args:
+        uid: ${UID}
+    container_name: lumen-app
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
+      APP_KEY: ${APP_KEY}
+      APP_LOCALE: en
+      APP_FALLBACK_LOCALE: en
+      API_KEY: ${API_KEY}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - ${HOST_PORT}:80
+    networks:
+      backend:
+        aliases:
+          - lumen-app
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    volumes:
+      - ./run/var:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    networks:
+      backend:
+        aliases:
+          - db
+
+networks:
+  backend:
+    name: backend-network

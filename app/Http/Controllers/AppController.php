@@ -18,7 +18,7 @@ class AppController extends Controller
     }
     public function index()
     {
-        return app()->version();
+        return view('index');
     }
 
     public function install(Request $request)

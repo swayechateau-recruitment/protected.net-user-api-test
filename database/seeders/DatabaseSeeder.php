@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UsersTableSeeder');
+        // Populates the users database
+        $this->call('\Database\Seeders\UsersTableSeeder');
     }
 }
