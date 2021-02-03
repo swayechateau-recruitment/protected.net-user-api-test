@@ -19,3 +19,12 @@ $router->get('/', 'AppController@index');
 $router->get('/install', 'AppController@install');
 // app search queries - only users return for now
 $router->get('/search', 'AppController@search');
+
+// users crud routes
+$router->get('/users', 'UserController@index');
+// Add a user
+$router->post('/users', 'UserController@create');
+
+$router->get('/users/{id}', 'UserController@show');
+$router->put('/users/{id}', 'UserController@update');
+$router->delete('/users/{id}', 'UserController@destroy');
