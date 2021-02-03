@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
 
-  <title>Your Project</title>
+  <title>Users Management Api</title>
 
   <!-- Flatdoc -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 
   <!-- Meta -->
   <meta content="Users Management Api" property="og:title">
-  <meta content="Protected.net Test - Users Management REST Api" name="description">
+  <meta content="Users Management REST Api Test" name="description">
 
   <!-- Initializer -->
   <script>
@@ -31,7 +31,7 @@
 
   <div class='header'>
     <div class='left'>
-      <h1>Your Project</h1>
+      <h1>Users Management Api</h1>
       <ul>
         <li><a href='https://github.com/swayechateau/pnt-users-api'>View on GitHub</a></li>
         <li><a href='https://github.com/swayechateau/pnt-users-api/issues'>Issues</a></li>
