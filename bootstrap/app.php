@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +72,11 @@ $app->configure('app');
 |
 */
 
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\ApiTokenMiddleware::class,
+]);
+
+/*
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
