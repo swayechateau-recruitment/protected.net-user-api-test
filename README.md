@@ -60,7 +60,7 @@ $ composer install
 ```
 
 The application can be preloaded via the browser by going to the install route
-`curl -i -H "api_token: {{ ENV_API_KEY }} " -X GET http://localhost:8888/install`
+`curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install`
 or by running this command
 
 ```sh
@@ -88,7 +88,7 @@ Curently the application has only one table besides the migrations table
 ### Users Table
 The users table has the following fields 
 
-| Field      | Type        | UNIQUE |
+| Field      | Type        | Unique |
 | ---------- | ----------- | ------ |
 | id         | BIGINT(20)  | YES    |
 | username   | VARCHAR(20) | YES    |
@@ -104,10 +104,17 @@ Api Routes
 
 ## Install 
 
+Accepted query parameters
+
+| Query      | Type        | Requred |
+| ---------- | ----------- | ------  |
+| api_token  | STRING      | YES     |
+| reinstall  | BOOL        | No      |
+
 ```sh
 curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
 ```
-to reinstall set reinstal parameter to true
+to reinstall set the `reinstall` query parameter to true
 
 ```sh
 curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?reinstall=true"
@@ -122,6 +129,15 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?r
 ```
 
 ## Search 
+
+Accepted query parameters
+
+| Query      | Type        | Requred |
+| ---------- | ----------- | ------  |
+| api_token  | STRING      | YES     |
+| q          | STRING      | YES     |
+
+The search route will search all users where the query param `q` is like the users first name, last name or username
 
 ```sh
 curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?q=e"
@@ -223,20 +239,36 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -H "Content-Type: application/json" -H 
 
 ### POST User
 ```sh
-curl --data "first_name=yoda1&last_name=rover"  -H "api_token:{{ ENV_API_KEY }}" -X POST http://localhost:8888/users/5
+curl --data "first_name=yoda&last_name=rover"  -H "api_token:{{ ENV_API_KEY }}" -X POST http://localhost:8888/users
 ```
 #### Expected Result
 ```json
-
+{
+    "id":8,
+    "username":"yoda",
+    "first_name":"yoda",
+    "last_name":"rover",
+    "dark_mode":0,
+    "created_at":"2021-02-03T15:21:49.000000Z",
+    "updated_at":"2021-02-03T15:21:49.000000Z"
+}
 ```
 
 ### PUT User
 ```sh
-curl -i -H "api_token: {{ ENV_API_KEY }} " -H "Content-Type: application/json" -H "Accept: application/json" -X GET http://localhost:8888/users/5
+curl --data "first_name=yoda1"  -H "api_token:{{ ENV_API_KEY }}" -X PUT http://localhost:8888/users/5
 ```
 #### Expected Result
 ```json
-
+{
+    "id":8,
+    "username":"yoda",
+    "first_name":"yoda1",
+    "last_name":"rover",
+    "dark_mode":0,
+    "created_at":"2021-02-03T15:21:49.000000Z",
+    "updated_at":"2021-02-03T15:21:49.000000Z"
+}
 ```
 
 ### DELETE User
