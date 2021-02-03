@@ -18,3 +18,5 @@ $router->get('/', function () use ($router) {
 });
 // app install
 $router->get('/install', 'AppController@install');
+// app search queries - only users return for now
+$router->get('/search', 'AppController@search');

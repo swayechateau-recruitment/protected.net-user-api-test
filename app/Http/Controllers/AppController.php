@@ -14,7 +14,7 @@ class AppController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except'=> 'index']);
     }
 
     public function install(Request $request)
@@ -41,4 +41,22 @@ class AppController extends Controller
         return response()->json(['installed' => false,'message' => 'App already installed or database already populated!'], 200);
     }
 
+    public function search(Request $request)
+    {
+        $q = $request->input('q');
+        if($q){
+            $results = app('db')->table('users')
+            ->where('username', 'like', "%{$q}%")
+            ->orWhere('first_name', 'like', "%{$q}%")
+            ->orWhere('last_name', 'like', "%{$q}%")
+            ->get();
+            return response()->json([
+                'search_term'=> $q,
+                'results' => $results,
+                'total' => count($results)
+            ], 200);
+        }
+        
+        return response()->json(['message' => 'please define a query']);
+    }
 }
