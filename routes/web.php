@@ -12,7 +12,9 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+// remove route later
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+// app install
+$router->get('/install', 'AppController@install');
