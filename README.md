@@ -50,6 +50,34 @@ MYSQL_ROOT_PASSWORD=d032CNpFgG7g6rvQJFs7nd3A7
 HOST_PORT=8888
 UID=1000
 ```
+## Setup
+The application can be preloaded via the browser once the development server is up 
+by calling the install api route
+
+```sh
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
+```
+
+If you decide to preload via the browser you can skip runing the following commands
+
+```sh
+# docker setup
+$ docker-compose exec lumen-app php artisan migrate --seed
+# normal setup
+$ php artisan migrate --seed
+```
+
+### Docker Setup
+
+You can load the development server with docker to test immediatley against a database
+
+```sh
+$ docker-compose up
+$ docker-compose exec lumen-app composer install
+$ docker-compose exec lumen-app php artisan migrate --seed
+```
+
+You can skip Normal setup
 
 ### Normal Setup
 
@@ -57,27 +85,10 @@ Please run the following command to install.
 
 ```sh
 $ composer install
-```
-The application can be preloaded via the browser once the development server is up 
-by calling the install api route
-
-```sh
-$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
-```
-or by running this command before loading the development server
-
-```sh
 $ php artisan migrate --seed
 ```
 
-### Load Development Server
-
-You can load the development server with docker to test immediatley against a database
-
-```sh
-$ docker-compose up
-```
-If you do not have docker or simply wish to test against an existing database run
+To load the development server run
 
 ```sh
 $ php -S localhost:8888 -t public

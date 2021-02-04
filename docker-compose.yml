@@ -18,8 +18,7 @@ services:
           - db
 
   lumen-app:
-    build:
-      context: '.'
+    image: swaye/php-7.4-apache
     container_name: lumen-app
     environment:
       APP_ENV: ${APP_ENV}
