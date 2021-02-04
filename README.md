@@ -58,16 +58,26 @@ Please run the following command to install.
 ```sh
 $ composer install
 ```
+The application can be preloaded via the browser once the development server is up 
+by calling the install api route
 
-The application can be preloaded via the browser by going to the install route
-`curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install`
-or by running this command
+```sh
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
+```
+or by running this command before loading the development server
 
 ```sh
 $ php artisan migrate --seed
 ```
 
-Load Development Server
+### Load Development Server
+
+You can load the development server with docker to test immediatley against a database
+
+```sh
+$ docker-compose up
+```
+If you do not have docker or simply wish to test against an existing database run
 
 ```sh
 $ php -S localhost:8888 -t public
@@ -112,12 +122,12 @@ Accepted query parameters
 | reinstall  | BOOL        | No      |
 
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/install
 ```
 to reinstall set the `reinstall` query parameter to true
 
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?reinstall=true"
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?reinstall=true"
 ```
 
 #### Expected Result
@@ -140,7 +150,7 @@ Accepted query parameters
 The search route will search all users where the query param `q` is like the users first name, last name or username
 
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?q=e"
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?q=e"
 ```
 
 #### Expected Result
@@ -192,7 +202,7 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET "http://localhost:8888/install?q
   
 ### GET Users
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/users
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/users
 ```
 
 #### Expected Result
@@ -222,7 +232,7 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/users
 
 ### GET User
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -H "Content-Type: application/json" -H "Accept: application/json" -X GET http://localhost:8888/users/5
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -H "Content-Type: application/json" -H "Accept: application/json" -X GET http://localhost:8888/users/5
 ```
 #### Expected Result
 ```json
@@ -239,7 +249,7 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -H "Content-Type: application/json" -H 
 
 ### POST User
 ```sh
-curl --data "first_name=yoda&last_name=rover"  -H "api_token:{{ ENV_API_KEY }}" -X POST http://localhost:8888/users
+$ curl --data "first_name=yoda&last_name=rover"  -H "api_token:{{ ENV_API_KEY }}" -X POST http://localhost:8888/users
 ```
 #### Expected Result
 ```json
@@ -256,7 +266,7 @@ curl --data "first_name=yoda&last_name=rover"  -H "api_token:{{ ENV_API_KEY }}" 
 
 ### PUT User
 ```sh
-curl --data "first_name=yoda1"  -H "api_token:{{ ENV_API_KEY }}" -X PUT http://localhost:8888/users/5
+$ curl --data "first_name=yoda1"  -H "api_token:{{ ENV_API_KEY }}" -X PUT http://localhost:8888/users/5
 ```
 #### Expected Result
 ```json
@@ -273,7 +283,7 @@ curl --data "first_name=yoda1"  -H "api_token:{{ ENV_API_KEY }}" -X PUT http://l
 
 ### DELETE User
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X DELETE http://localhost:8888/users/1
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X DELETE http://localhost:8888/users/1
 ```
 #### Expected Result
 ```json
@@ -286,7 +296,7 @@ curl -i -H "api_token:{{ ENV_API_KEY }}" -X DELETE http://localhost:8888/users/1
 ### GET Toggle User Dark Mode
 
 ```sh
-curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/users/5/tdm
+$ curl -i -H "api_token:{{ ENV_API_KEY }}" -X GET http://localhost:8888/users/5/tdm
 ```
 
 #### Expected Result
